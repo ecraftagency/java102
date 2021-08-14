@@ -4,7 +4,7 @@ import utils.Utils;
 import java.util.*;
 import static java.lang.System.out;
 
-public class Ex1 {
+public class Ex2 {
   static Scanner      in  = new Scanner(System.in);
   static List<String> ls  = new ArrayList<>();
   static Map<String, String> desc; //learn more about map, what is map? what is it use for?
