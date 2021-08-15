@@ -2,7 +2,6 @@ package lab6.Ex3.apps;
 
 import lab6.Ex3.Student;
 import lab6.Ex3.StudentController;
-
 import java.util.Map;
 
 @SuppressWarnings("unused")
@@ -19,14 +18,7 @@ public class Handler {
     return "ok";
   }
 
-  public String printStudents(Map<String, String> input) {
-    return StudentController.inst().printStudent();
-  }
-
-  public String pt2(Map<String, String> input) {
-    float a = Float.parseFloat(input.get("a"));
-    float b = Float.parseFloat(input.get("b"));
-    float c = Float.parseFloat(input.get("c"));
-    return "12";
+  public String listStudents(Map<String, String> input) {
+    return StudentController.inst().listStudents();
   }
 }

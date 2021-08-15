@@ -21,8 +21,7 @@ public class StudentController {
     students.add(student);
   }
 
-  public String printStudent() {
-    System.out.print(students);
+  public String listStudents() {
     return students.toString();
   }
 
