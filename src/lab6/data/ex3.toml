@@ -1,0 +1,13 @@
+title = "Console App"
+
+welcome = "Hello this is my console app"
+
+[loop]
+    end = "exit"
+    print = "Operation: "
+    [[loop.sw]]
+        handler = "addStudent"
+        input = ["name", "id", "phone", "email"]
+    [[loop.sw]]
+        handler = "printStudents"
+        input = []
