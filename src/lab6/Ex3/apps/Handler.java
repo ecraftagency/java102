@@ -22,4 +22,11 @@ public class Handler {
   public String printStudents(Map<String, String> input) {
     return StudentController.inst().printStudent();
   }
+
+  public String pt2(Map<String, String> input) {
+    float a = Float.parseFloat(input.get("a"));
+    float b = Float.parseFloat(input.get("b"));
+    float c = Float.parseFloat(input.get("c"));
+    return "12";
+  }
 }
