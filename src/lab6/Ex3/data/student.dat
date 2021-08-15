@@ -1,0 +1,16 @@
+[STUDENT]
+name=hello
+email=hello@gmail.com
+phone=0901343403
+id=123456789000
+[STUDENT]
+name=nashorn
+email=nashorn@gmail.com
+phone=0901343403
+id=123456789000
+[STUDENT]
+name=driv
+email=driv@gmail.com
+phone=0901343403
+id=123456789000
+[END]
