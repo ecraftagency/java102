@@ -11,10 +11,23 @@ input   = "stdout"
     end   = "exit"
     print = "Exercise: "
     [[loop.sw]]
-        handler = "ex1" #https://www.techiedelight.com/find-pair-with-given-sum-array/
+        #Find a pair with the given sum in an array
+        handler = "ex1"
         args    = ["arr", "target"]
         desc    = ["Input Arr: ", "Input the sum: "]
     [[loop.sw]]
-        handler = "ex2" #https://www.techiedelight.com/find-pair-with-given-sum-array/
+        #Check if a sub array with 0 sum exists or not
+        handler = "ex2"
+        args    = ["arr"]
+        desc    = []
+    [[loop.sw]]
+        #Print all sub arrays with 0 sum
+        handler = "ex3"
+        args    = ["arr"]
+        desc    = []
+    [[loop.sw]]
+        #Sort binary array in linear time O(N) and constant space
+        #[0,1,1,0,0,1,0] -> [0,0,0,0,1,1,1]
+        handler = "ex4"
         args    = ["arr"]
         desc    = []

@@ -1,24 +1,25 @@
-package lab6.Ex3.apps;
+package lab6.Ex3;
 
-import lab6.Ex3.Student;
-import lab6.Ex3.StudentController;
+import java.io.PrintStream;
 import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Handler {
-  public String addStudent(Map<String, String> input) {
+  public void add(Map<String, String> input, PrintStream out) {
     String name   = input.get("name");
     String id     = input.get("id");
     String email  = input.get("email");
     String phone  = input.get("phone");
     String valid  = Student.validate(name, id, email, phone);
-    if (!valid.equals("ok"))
-      return valid;
+    if (!valid.equals("ok")) {
+      out.println(valid);
+      return;
+    }
     StudentController.inst().addStudent(new Student(name, id, email, phone));
-    return "ok";
+    out.println("ok");
   }
 
-  public String listStudents(Map<String, String> input) {
-    return StudentController.inst().listStudents();
+  public void list(Map<String, String> input, PrintStream out) {
+    out.println(StudentController.inst().listStudents());
   }
 }

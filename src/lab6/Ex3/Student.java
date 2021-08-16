@@ -1,7 +1,7 @@
 package lab6.Ex3;
 
 public class Student {
-  static final String idRegex     = "^[0-9]{12}$";
+  static final String idRegex     = "^[0-9]{6}$";
   static final String phoneRegex  = "^[0-9]{10}$|^[0-9]{11}$";
   static final String mailRegex   = "^(.+)@(.+)$";
 

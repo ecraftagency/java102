@@ -1,12 +1,11 @@
 package utils;
 
+import com.google.gson.Gson;
+
 @SuppressWarnings("unused")
 public class Utils {
+  static Gson gson = new Gson();
   public static int[] parseIntArr(String input) {
-    String[] split = input.split(",");
-    int[] res = new int[split.length];
-    for (int i = 0; i < split.length; i++)
-      res[i] = Integer.parseInt(split[i].trim());
-    return res;
+    return gson.fromJson(input, int[].class);
   }
 }

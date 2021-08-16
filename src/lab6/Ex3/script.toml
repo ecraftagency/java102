@@ -1,0 +1,21 @@
+welc = """
+       Welcome to the magnificent student app
+       Usage:
+           - addStudent: to add a new student
+           - listStudents: print list of students
+           - exit: quit the program
+       """
+output  = "stdin"
+input   = "stdout"
+
+[loop]
+    end   = "exit"
+    print = "Operation: "
+    [[loop.sw]]
+        handler = "add"
+        args    = ["id", "name", "email", "phone"]
+        desc    = ["Enter ID: ", "Enter name: ", "Enter email: ", "Enter phone: "]
+    [[loop.sw]]
+        handler = "list"
+        args    = []
+        desc    = []
