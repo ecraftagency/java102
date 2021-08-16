@@ -1,0 +1,20 @@
+welc = """
+Ex1 to Ex20, only easy and medium problem
+Usage:
+    - ex[1..20]: to run equivalent exercise
+    - exit: quit the program
+"""
+output  = "stdin"
+input   = "stdout"
+
+[loop]
+    end   = "exit"
+    print = "Exercise: "
+    [[loop.sw]]
+        handler = "ex1" #https://www.techiedelight.com/find-pair-with-given-sum-array/
+        args    = ["arr", "target"]
+        desc    = ["Input Arr: ", "Input the sum: "]
+    [[loop.sw]]
+        handler = "ex2" #https://www.techiedelight.com/find-pair-with-given-sum-array/
+        args    = ["arr"]
+        desc    = []

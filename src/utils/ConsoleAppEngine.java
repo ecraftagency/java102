@@ -2,47 +2,48 @@ package utils;
 import com.moandjiezana.toml.Toml;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleAppEngine {
   public Components.Loop  loop;
-  public Map<String, String> desc;
   public String welc;
+  public String output;
+  public String input;
+  public PrintStream out;
+  Scanner in;
 
-  public <T> void run(Object handler, Class<T> type) {
-    Scanner scanner = new Scanner(System.in);
+  public <T> void run(Object handler, Class<T> type) throws FileNotFoundException {
+    in  = "file".equals(input) ? new Scanner(new FileInputStream("out/in.dat")) : new Scanner(System.in);
+    out = "file".equals(output) ? new PrintStream(new FilterOutputStream(new FileOutputStream("out/out.dat"))) : System.out;
+
     System.out.println(welc);
-    Map<String, String> inputs = new HashMap<>();
+    Map<String, String> args = new HashMap<>();
 
     if (loop != null) {
       do {
         System.out.print(loop.print);
-        String cmd = scanner.nextLine();
+        String cmd = in.nextLine();
 
         if (cmd.equals(loop.end))
           break;
 
         loop.sw.stream().filter(e -> e.handler.equals(cmd)).findAny().ifPresent(e -> {
-          inputs.clear();
+          args.clear();
 
-          for (String input : e.input) {
-            System.out.print(desc.getOrDefault(cmd + "_" + input, input + ": "));
-            String val = scanner.nextLine();
-            inputs.put(input, val);
+          for (String input : e.args) {
+            int i = e.args.indexOf(input);
+            System.out.print(i < e.desc.size() ? e.desc.get(i) : input + ": ");
+            String val = in.nextLine();
+            args.put(input, val);
           }
 
           try {
-            Method med = type.getMethod(cmd, Map.class);
-            Object res = med.invoke(handler, inputs);
-            System.out.println(res);
-          } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
-            System.out.println(ex.getMessage());
+            type.getMethod(cmd, Map.class, PrintStream.class).invoke(handler, args, out);
+          } catch (Exception ex) {
+            ex.printStackTrace();
           }
-
         });
       }
       while (true);

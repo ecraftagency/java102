@@ -12,6 +12,13 @@ import java.util.Map;
 
 public class WebAppEngine {
   public Components.Loop  loop;
+  public PrintStream out;
+  public ByteArrayOutputStream bos;
+
+  public WebAppEngine() {
+    bos = new ByteArrayOutputStream();
+    out = new PrintStream(new FilterOutputStream(bos));
+  }
 
   public <T> void run(Object handler, Class<T> type, int port) throws IOException {
     HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -19,12 +26,12 @@ public class WebAppEngine {
     for (Components.Switch sw : loop.sw) {
       server.createContext("/" + sw.handler, ex -> {
         try {
-          Method med = type.getMethod(sw.handler, Map.class);
-          String res = (String)med.invoke(handler, queryToMap(ex.getRequestURI().getQuery()));
-
-          ex.sendResponseHeaders(200, res.length());
+          bos.reset();
+          Method med = type.getMethod(sw.handler, Map.class, PrintStream.class);
+          med.invoke(handler, queryToMap(ex.getRequestURI().getQuery()), this.out);
+          ex.sendResponseHeaders(200, bos.size());
           OutputStream os = ex.getResponseBody();
-          os.write(res.getBytes());
+          os.write(bos.toByteArray());
           os.close();
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
 
