@@ -21,33 +21,33 @@ public class ConsoleAppEngine {
     System.out.println(welc);
     Map<String, String> args = new HashMap<>();
 
-    if (loop != null) {
-      do {
-        System.out.print(loop.print);
-        String cmd = in.nextLine();
+    do {
+      System.out.print(input.equals("stdin") ? loop.print : "");
+      String cmd = in.nextLine();
 
-        if (cmd.equals(loop.end))
-          break;
+      if (cmd.equals(loop.end))
+        break;
 
-        loop.sw.stream().filter(e -> e.handler.equals(cmd)).findAny().ifPresent(e -> {
-          args.clear();
+      loop.sw.stream().filter(e -> e.handler.equals(cmd)).findAny().ifPresent(e -> {
+        args.clear();
 
-          for (String input : e.args) {
-            int i = e.args.indexOf(input);
-            System.out.print(i < e.desc.size() ? e.desc.get(i) : input + ": ");
-            String val = in.nextLine();
-            args.put(input, val);
+        for (String arg : e.args) {
+          if (input.equals("stdin")) {
+            int i = e.args.indexOf(arg);
+            System.out.print(i < e.desc.size() ? e.desc.get(i) : arg + ": ");
           }
+          String val = in.nextLine();
+          args.put(arg, val);
+        }
 
-          try {
-            type.getMethod(cmd, Map.class, PrintStream.class).invoke(handler, args, out);
-          } catch (Exception ex) {
-            ex.printStackTrace();
-          }
-        });
-      }
-      while (true);
+        try {
+          type.getMethod(cmd, Map.class, PrintStream.class).invoke(handler, args, out);
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+      });
     }
+    while (true);
   }
 
   public static <T> void execute(String script, Object handler, Class<T> type) throws IOException {

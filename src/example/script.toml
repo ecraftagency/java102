@@ -1,0 +1,31 @@
+welc = """
+Welcome to the magnificent example app
+Usage:
+   - add: to add a new example
+   - list: print list of students
+   - find: to find a example with given id
+   - rem: remove a example with given id
+   - exit: quit the program
+"""
+output  = "stdout"
+input   = "file"
+
+[loop]
+    end   = "exit"
+    print = "Operation: "
+    [[loop.sw]]
+        handler = "add"
+        args    = ["id", "name", "email", "phone"]
+        desc    = ["Enter ID: ", "Enter name: ", "Enter email: ", "Enter phone: "]
+    [[loop.sw]]
+        handler = "list"
+        args    = []
+        desc    = []
+    [[loop.sw]]
+        handler = "find"
+        args    = ["id"]
+        desc    = ["Enter ID"]
+    [[loop.sw]]
+        handler = "rem"
+        args    = ["id"]
+        desc    = ["Enter ID"]

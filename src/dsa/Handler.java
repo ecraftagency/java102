@@ -1,7 +1,8 @@
-package part1;
+package dsa;
 
 import utils.Utils;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Map;
 
 @SuppressWarnings("unused")
@@ -24,6 +25,19 @@ public class Handler {
 
   public void ex4(Map<String, String> in, PrintStream out) {
     int[] arr = Utils.parseIntArr(in.get("arr"));
-    out.println("not implementation");
+
+    int zeros = 0;
+    for (int value: arr)
+      if (value == 0)
+        zeros++;
+
+    int k = 0;
+    while (zeros-- != 0)
+      arr[k++] = 0;
+
+    while (k < arr.length)
+      arr[k++] = 1;
+
+    out.println(Arrays.toString(arr));
   }
 }
